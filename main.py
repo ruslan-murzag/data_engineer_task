@@ -81,11 +81,12 @@ for i in range(0,100):
     }
     journal_collection.insert_one(call)
 
+# Задача 7
 data = journal_collection.find({})
 data_journal = pd.DataFrame.from_records(data)
 by_country = data_journal.groupby('b_country').agg({"_id":'count',"duration":"sum"})
 
-
+# Задача 8
 april_18 = data_journal[data_journal["datetime"].dt.date == pd.to_datetime('2023-04-18').date()]
 counter = april_18.groupby("a_number").agg({"datetime": "count"})
 filtered = counter[counter["datetime"] >= 3]
